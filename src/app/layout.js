@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Music Quiz - ทดสอบความรู้เพลง",
-  description: "เกมทายชื่อเพลงจากการฟัง พร้อมระบบจับเวลา 30 วินาทีต่อข้อ",
+  title: "Music Quiz - ทดสอบความรู้เพลง 2 โหมด",
+  description: "เกมทายชื่อเพลงและชื่ออัลบั้ม พร้อมระบบจับเวลา 30 วินาทีต่อข้อ และแสดงเฉลย 10 วินาที",
 };
 
 export default function RootLayout({ children }) {

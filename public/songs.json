@@ -1,0 +1,469 @@
+{
+  "songs": [
+    {
+      "filename": "1-01. ダ・カーポ ～第2ボタンの誓い～.mp3",
+      "title": "ダ・カーポ ～第2ボタンの誓い～",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-02. Dream ～The ally of～.mp3",
+      "title": "Dream ～The ally of～",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-03. Dream ～The other side～.mp3",
+      "title": "Dream ～The other side～",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-04. Small Cherry ～Promised bell～.mp3",
+      "title": "Small Cherry ～Promised bell～",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-05. White Season.mp3",
+      "title": "White Season",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-06. All my love of the World.mp3",
+      "title": "All my love of the World",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-07. うたまるえかき唄.mp3",
+      "title": "うたまるえかき唄",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-08. BELIEVE.mp3",
+      "title": "BELIEVE",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-09. そよ風のハーモニー.mp3",
+      "title": "そよ風のハーモニー",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-10. 未来地図.mp3",
+      "title": "未来地図",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "1-11. Eternal love ～眩しい季節～.mp3",
+      "title": "Eternal love ～眩しい季節～",
+      "album": "Da Capo"
+    },
+    {
+      "filename": "2-01. Special Day ～太陽の神様～.mp3",
+      "title": "Special Day ～太陽の神様～",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-02. 明日の風.mp3",
+      "title": "明日の風",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-03. 赤い糸.mp3",
+      "title": "赤い糸",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-04. 和泉子絵描き歌.mp3",
+      "title": "和泉子絵描き歌",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-05. 恋のロイヤル☆ストレートフラッシュ.mp3",
+      "title": "恋のロイヤル☆ストレートフラッシュ",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-06. ひとひらハート.mp3",
+      "title": "ひとひらハート",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-07. 僕らの場所へ.mp3",
+      "title": "僕らの場所へ",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-08. 君の空に.mp3",
+      "title": "君の空に",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-09. ただ今だけを、ずっと….mp3",
+      "title": "ただ今だけを、ずっと…",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-10. Hello Future.mp3",
+      "title": "Hello Future",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-11. 二人だけの音楽会.mp3",
+      "title": "二人だけの音楽会",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "2-12. 永遠の願い.mp3",
+      "title": "永遠の願い",
+      "album": "Da Capo Second Season"
+    },
+    {
+      "filename": "3-01. トキメキブーケトス.mp3",
+      "title": "トキメキブーケトス",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-02. My Dearest.mp3",
+      "title": "My Dearest",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-03. 愛妻家でりでりっく.mp3",
+      "title": "愛妻家でりでりっく",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-04. beautiful flower.mp3",
+      "title": "beautiful flower",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-05. Especially.mp3",
+      "title": "Especially",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-06. ダ・カーポII ～あさきゆめみし君と～.mp3",
+      "title": "ダ・カーポII ～あさきゆめみし君と～",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-07. TIME WILL SHINE.mp3",
+      "title": "TIME WILL SHINE",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-08. Little Distance.mp3",
+      "title": "Little Distance",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-09. If...～I wish～.mp3",
+      "title": "If...～I wish～",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-10. まぶしくてみえない.mp3",
+      "title": "まぶしくてみえない",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "3-11. Spring Has Come.mp3",
+      "title": "Spring Has Come",
+      "album": "Da Capo Second Graduation"
+    },
+    {
+      "filename": "4-01. Happy my life 〜Thank you for everything!!〜.mp3",
+      "title": "Happy my life 〜Thank you for everything!!〜",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-02. 君のとなり.mp3",
+      "title": "君のとなり",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-03. with ～輝きのフィルム～.mp3",
+      "title": "with ～輝きのフィルム～",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-04. HAPPY CHERRY FESTA!.mp3",
+      "title": "HAPPY CHERRY FESTA!",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-05. believe yourself.mp3",
+      "title": "believe yourself",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-06. 桜の羽根 ～Endless memory～.mp3",
+      "title": "桜の羽根 ～Endless memory～",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-07. Tomorrow_s Way ～アツイナミダ～.mp3",
+      "title": "Tomorrow's Way ～アツイナミダ～",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-08. Cloudy.mp3",
+      "title": "Cloudy",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-09. さよならの向こう側で.mp3",
+      "title": "さよならの向こう側で",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-10. ラブソングを君に.mp3",
+      "title": "ラブソングを君に",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "4-11. 1 sec..mp3",
+      "title": "1 sec.",
+      "album": "Da Capo Plus Communication"
+    },
+    {
+      "filename": "5-01. レンブラントの光.mp3",
+      "title": "レンブラントの光",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-02. 陽はまた昇る.mp3",
+      "title": "陽はまた昇る",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-03. 雨上がりに咲いた虹.mp3",
+      "title": "雨上がりに咲いた虹",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-04. 未来へのお守り.mp3",
+      "title": "未来へのお守り",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-05. 今を生きて.mp3",
+      "title": "今を生きて",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-06. Graduation from yesterday.mp3",
+      "title": "Graduation from yesterday",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-07. 恋のローラーコースター.mp3",
+      "title": "恋のローラーコースター",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-08. 一緒にDO MY BEST!!.mp3",
+      "title": "一緒にDO MY BEST!!",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-09. Love Motion.mp3",
+      "title": "Love Motion",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-10. 桜風.mp3",
+      "title": "桜風",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-11. 恋するX_mas.mp3",
+      "title": "恋するX'mas",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "5-12. D.C. Dream X_mas Xmas メドレー.mp3",
+      "title": "D.C. Dream X'mas Xmas メドレー",
+      "album": "Da Capo If"
+    },
+    {
+      "filename": "6-01. ダ・カーポIII ~キミにささげる あいのマホウ~.mp3",
+      "title": "ダ・カーポIII ~キミにささげる あいのマホウ~",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-02. All is Love for you.mp3",
+      "title": "All is Love for you",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-03. ハジマリノウタ.mp3",
+      "title": "ハジマリノウタ",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-04. shiny steps!!.mp3",
+      "title": "shiny steps!!",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-05. TRUE MAGIC......mp3",
+      "title": "TRUE MAGIC...",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-06. 春風に願いを.mp3",
+      "title": "春風に願いを",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-07. ひらり涙.mp3",
+      "title": "ひらり涙",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-08. 君がいた未来 君といない未来.mp3",
+      "title": "君がいた未来 君といない未来",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-09. 私には見えない.mp3",
+      "title": "私には見えない",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-10. millions of thanks.mp3",
+      "title": "millions of thanks",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-11. あの日見た桜のように (short ver.).mp3",
+      "title": "あの日見た桜のように (short ver.)",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-12. 自由の羽根 (short ver.).mp3",
+      "title": "自由の羽根 (short ver.)",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "6-13. Wonderful Days!.mp3",
+      "title": "Wonderful Days!",
+      "album": "Da Capo III"
+    },
+    {
+      "filename": "7-01. Platinum Days.mp3",
+      "title": "Platinum Days",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-02. タイムカプセル.mp3",
+      "title": "タイムカプセル",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-03. Silent Wish.mp3",
+      "title": "Silent Wish",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-04. MerryMerryMerry!.mp3",
+      "title": "MerryMerryMerry!",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-05. 桜色の願い.mp3",
+      "title": "桜色の願い",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-06. my happy days.mp3",
+      "title": "my happy days",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-07. センチメンタルパレット.mp3",
+      "title": "センチメンタルパレット",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-08. Happy Sensation.mp3",
+      "title": "Happy Sensation",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-09. キセキの足跡.mp3",
+      "title": "キセキの足跡",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-10. 春風とクリシェ.mp3",
+      "title": "春風とクリシェ",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-11. キミがいない.mp3",
+      "title": "キミがいない",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "7-12. あさきゆめみし君と.mp3",
+      "title": "あさきゆめみし君と",
+      "album": "Da Capo III With You"
+    },
+    {
+      "filename": "8-01. 未来パレード.mp3",
+      "title": "未来パレード",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-02. HAPPY CRESCENDO.mp3",
+      "title": "HAPPY CRESCENDO",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-03. 僕たちの明日.mp3",
+      "title": "僕たちの明日",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-04. 僕の宝物.mp3",
+      "title": "僕の宝物",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-05. 君色のラブソング.mp3",
+      "title": "君色のラブソング",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-06. キミと僕のキセキ.mp3",
+      "title": "キミと僕のキセキ",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-07. 僕はキミでできている.mp3",
+      "title": "僕はキミでできている",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-08. MISTY LOVE.mp3",
+      "title": "MISTY LOVE",
+      "album": "Da Capo 4"
+    },
+    {
+      "filename": "8-09. 未来トラベラー.mp3",
+      "title": "未来トラベラー",
+      "album": "Da Capo 4"
+    }
+  ],
+  "albums": [
+    "Da Capo",
+    "Da Capo Second Season", 
+    "Da Capo Second Graduation",
+    "Da Capo Plus Communication",
+    "Da Capo If",
+    "Da Capo III",
+    "Da Capo III With You",
+    "Da Capo 4"
+  ]
+}

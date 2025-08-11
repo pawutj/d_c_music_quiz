@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 export default function MusicQuiz() {
-  const [gameState, setGameState] = useState('setup'); // setup, playing, results
-  const [musicFiles, setMusicFiles] = useState([]);
+  const [gameState, setGameState] = useState('setup'); // setup, playing, answer, results
+  const [songsData, setSongsData] = useState([]);
+  const [albumsList, setAlbumsList] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(30);
@@ -15,112 +16,31 @@ export default function MusicQuiz() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  const [currentSongData, setCurrentSongData] = useState(null);
+  const [answerTimeLeft, setAnswerTimeLeft] = useState(10);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [quizMode, setQuizMode] = useState('album'); // 'song' หรือ 'album'
   
   const audioRef = useRef(null);
   const timerRef = useRef(null);
+  const answerTimerRef = useRef(null);
   const inputRef = useRef(null);
   const suggestionsRef = useRef(null);
 
-  // รายชื่อเพลงทั้งหมดจาก music directory
-  const allSongs = [
-    "1-01. ダ・カーポ ～第2ボタンの誓い～.mp3",
-    "1-02. Dream ～The ally of～.mp3",
-    "1-03. Dream ～The other side～.mp3",
-    "1-04. Small Cherry ～Promised bell～.mp3",
-    "1-05. White Season.mp3",
-    "1-06. All my love of the World.mp3",
-    "1-07. うたまるえかき唄.mp3",
-    "1-08. BELIEVE.mp3",
-    "1-09. そよ風のハーモニー.mp3",
-    "1-10. 未来地図.mp3",
-    "1-11. Eternal love ～眩しい季節～.mp3",
-    "2-01. Special Day ～太陽の神様～.mp3",
-    "2-02. 明日の風.mp3",
-    "2-03. 赤い糸.mp3",
-    "2-04. 和泉子絵描き歌.mp3",
-    "2-05. 恋のロイヤル☆ストレートフラッシュ.mp3",
-    "2-06. ひとひらハート.mp3",
-    "2-07. 僕らの場所へ.mp3",
-    "2-08. 君の空に.mp3",
-    "2-09. ただ今だけを、ずっと….mp3",
-    "2-10. Hello Future.mp3",
-    "2-11. 二人だけの音楽会.mp3",
-    "2-12. 永遠の願い.mp3",
-    "3-01. トキメキブーケトス.mp3",
-    "3-02. My Dearest.mp3",
-    "3-03. 愛妻家でりでりっく.mp3",
-    "3-04. beautiful flower.mp3",
-    "3-05. Especially.mp3",
-    "3-06. ダ・カーポII ～あさきゆめみし君と～.mp3",
-    "3-07. TIME WILL SHINE.mp3",
-    "3-08. Little Distance.mp3",
-    "3-09. If...～I wish～.mp3",
-    "3-10. まぶしくてみえない.mp3",
-    "3-11. Spring Has Come.mp3",
-    "4-01. Happy my life 〜Thank you for everything!!〜.mp3",
-    "4-02. 君のとなり.mp3",
-    "4-03. with ～輝きのフィルム～.mp3",
-    "4-04. HAPPY CHERRY FESTA!.mp3",
-    "4-05. believe yourself.mp3",
-    "4-06. 桜の羽根 ～Endless memory～.mp3",
-    "4-07. Tomorrow_s Way ～アツイナミダ～.mp3",
-    "4-08. Cloudy.mp3",
-    "4-09. さよならの向こう側で.mp3",
-    "4-10. ラブソングを君に.mp3",
-    "4-11. 1 sec..mp3",
-    "5-01. レンブラントの光.mp3",
-    "5-02. 陽はまた昇る.mp3",
-    "5-03. 雨上がりに咲いた虹.mp3",
-    "5-04. 未来へのお守り.mp3",
-    "5-05. 今を生きて.mp3",
-    "5-06. Graduation from yesterday.mp3",
-    "5-07. 恋のローラーコースター.mp3",
-    "5-08. 一緒にDO MY BEST!!.mp3",
-    "5-09. Love Motion.mp3",
-    "5-10. 桜風.mp3",
-    "5-11. 恋するX_mas.mp3",
-    "5-12. D.C. Dream X_mas Xmas メドレー.mp3",
-    "6-01. ダ・カーポIII ~キミにささげる あいのマホウ~.mp3",
-    "6-02. All is Love for you.mp3",
-    "6-03. ハジマリノウタ.mp3",
-    "6-04. shiny steps!!.mp3",
-    "6-05. TRUE MAGIC......mp3",
-    "6-06. 春風に願いを.mp3",
-    "6-07. ひらり涙.mp3",
-    "6-08. 君がいた未来 君といない未来.mp3",
-    "6-09. 私には見えない.mp3",
-    "6-10. millions of thanks.mp3",
-    "6-11. あの日見た桜のように (short ver.).mp3",
-    "6-12. 自由の羽根 (short ver.).mp3",
-    "6-13. Wonderful Days!.mp3",
-    "7-01. Platinum Days.mp3",
-    "7-02. タイムカプセル.mp3",
-    "7-03. Silent Wish.mp3",
-    "7-04. MerryMerryMerry!.mp3",
-    "7-05. 桜色の願い.mp3",
-    "7-06. my happy days.mp3",
-    "7-07. センチメンタルパレット.mp3",
-    "7-08. Happy Sensation.mp3",
-    "7-09. キセキの足跡.mp3",
-    "7-10. 春風とクリシェ.mp3",
-    "7-11. キミがいない.mp3",
-    "7-12. あさきゆめみし君と.mp3",
-    "8-01. 未来パレード.mp3",
-    "8-02. HAPPY CRESCENDO.mp3",
-    "8-03. 僕たちの明日.mp3",
-    "8-04. 僕の宝物.mp3",
-    "8-05. 君色のラブソング.mp3",
-    "8-06. キミと僕のキセキ.mp3",
-    "8-07. 僕はキミでできている.mp3",
-    "8-08. MISTY LOVE.mp3",
-    "8-09. 未来トラベラー.mp3"
-  ];
-
-  // สร้างรายชื่อคำตอบ (ไม่มี .mp3)
-  const allAnswers = allSongs.map(song => song.replace('.mp3', ''));
-
+  // โหลดข้อมูลจาก JSON
   useEffect(() => {
-    setMusicFiles(allSongs);
+    const loadSongsData = async () => {
+      try {
+        const response = await fetch('/songs.json');
+        const data = await response.json();
+        setSongsData(data.songs);
+        setAlbumsList(data.albums);
+      } catch (error) {
+        console.error('Error loading songs data:', error);
+      }
+    };
+
+    loadSongsData();
   }, []);
 
   useEffect(() => {
@@ -139,12 +59,43 @@ export default function MusicQuiz() {
     };
   }, [gameState, timeLeft]);
 
-  // Autocomplete logic
+  // Answer timer
+  useEffect(() => {
+    if (gameState === 'answer' && answerTimeLeft > 0) {
+      answerTimerRef.current = setTimeout(() => {
+        setAnswerTimeLeft(answerTimeLeft - 1);
+      }, 1000);
+    } else if (answerTimeLeft === 0) {
+      nextQuestion();
+    }
+
+    return () => {
+      if (answerTimerRef.current) {
+        clearTimeout(answerTimerRef.current);
+      }
+    };
+  }, [gameState, answerTimeLeft]);
+
+  // Autocomplete logic - ปรับตาม mode
   useEffect(() => {
     if (userAnswer.length >= 1) {
-      const filtered = allAnswers.filter(answer =>
-        answer.toLowerCase().includes(userAnswer.toLowerCase())
-      ).slice(0, 8); // แสดงแค่ 8 รายการ
+      let filtered = [];
+      
+      if (quizMode === 'album') {
+        // Mode อัลบั้ม: แสดงรายชื่ออัลบั้ม
+        filtered = albumsList.filter(album =>
+          album.toLowerCase().includes(userAnswer.toLowerCase())
+        );
+      } else {
+        // Mode เพลง: แสดงรายชื่อเพลงทั้งหมด (ไม่มี .mp3)
+        filtered = songsData
+          .map(song => song.title)
+          .filter(title =>
+            title.toLowerCase().includes(userAnswer.toLowerCase())
+          )
+          .slice(0, 8);
+      }
+      
       setFilteredSuggestions(filtered);
       setShowSuggestions(filtered.length > 0);
       setSelectedSuggestionIndex(-1);
@@ -152,7 +103,7 @@ export default function MusicQuiz() {
       setShowSuggestions(false);
       setFilteredSuggestions([]);
     }
-  }, [userAnswer]);
+  }, [userAnswer, albumsList, songsData, quizMode]);
 
   const shuffleArray = (array) => {
     const shuffled = [...array];
@@ -164,9 +115,9 @@ export default function MusicQuiz() {
   };
 
   const startQuiz = () => {
-    if (musicFiles.length === 0) return;
+    if (songsData.length === 0) return;
     
-    const shuffled = shuffleArray(musicFiles);
+    const shuffled = shuffleArray(songsData);
     const selectedSongs = shuffled.slice(0, numberOfQuestions);
     setShuffledSongs(selectedSongs);
     setCurrentQuestionIndex(0);
@@ -182,11 +133,13 @@ export default function MusicQuiz() {
       return;
     }
 
+    const songData = songs[questionIndex];
+    setCurrentSongData(songData);
     setTimeLeft(30);
     setUserAnswer('');
     setShowSuggestions(false);
     
-    const audioSrc = `/music/${encodeURIComponent(songs[questionIndex])}`;
+    const audioSrc = `/music/${encodeURIComponent(songData.filename)}`;
     if (audioRef.current) {
       audioRef.current.src = audioSrc;
       audioRef.current.load();
@@ -199,34 +152,46 @@ export default function MusicQuiz() {
   const submitAnswer = () => {
     setShowSuggestions(false);
     
-    const currentSong = shuffledSongs[currentQuestionIndex];
-    const correctAnswer = currentSong.replace('.mp3', '');
-    const isCorrect = userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase();
+    // ตรวจคำตอบตาม mode
+    const correctAnswer = quizMode === 'album' ? currentSongData.album : currentSongData.title;
+    const correct = userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase();
+    setIsCorrect(correct);
     
-    if (isCorrect) {
+    if (correct) {
       setScore(score + 1);
     }
 
     const result = {
       question: currentQuestionIndex + 1,
-      song: currentSong,
+      songData: currentSongData,
       userAnswer: userAnswer || '(ไม่ตอบ)',
       correctAnswer: correctAnswer,
-      isCorrect: isCorrect,
-      timeUsed: 30 - timeLeft
+      isCorrect: correct,
+      timeUsed: 30 - timeLeft,
+      mode: quizMode
     };
 
     setQuizResults([...quizResults, result]);
 
+    // แสดงเฉลย 10 วินาที
+    setGameState('answer');
+    setAnswerTimeLeft(10);
+
+    // หยุดเพลง
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+
+  const nextQuestion = () => {
     const nextIndex = currentQuestionIndex + 1;
     setCurrentQuestionIndex(nextIndex);
     
     if (nextIndex >= shuffledSongs.length) {
-      setTimeout(() => endQuiz(), 1000);
+      endQuiz();
     } else {
-      setTimeout(() => {
-        loadQuestion(nextIndex, shuffledSongs);
-      }, 1000);
+      setGameState('playing');
+      loadQuestion(nextIndex, shuffledSongs);
     }
   };
 
@@ -240,6 +205,9 @@ export default function MusicQuiz() {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
+    if (answerTimerRef.current) {
+      clearTimeout(answerTimerRef.current);
+    }
     if (audioRef.current) {
       audioRef.current.pause();
     }
@@ -250,10 +218,12 @@ export default function MusicQuiz() {
     setCurrentQuestionIndex(0);
     setScore(0);
     setTimeLeft(30);
+    setAnswerTimeLeft(10);
     setUserAnswer('');
     setQuizResults([]);
     setShuffledSongs([]);
     setShowSuggestions(false);
+    setCurrentSongData(null);
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = '';
@@ -308,7 +278,6 @@ export default function MusicQuiz() {
   };
 
   const handleInputBlur = () => {
-    // ใช้ setTimeout เพื่อให้ click event ทำงานก่อน
     setTimeout(() => {
       setShowSuggestions(false);
     }, 200);
@@ -320,6 +289,28 @@ export default function MusicQuiz() {
     }
   };
 
+  const getModeInfo = () => {
+    if (quizMode === 'album') {
+      return {
+        title: 'Album Quiz',
+        emoji: '💿',
+        description: 'ทายชื่ออัลบั้ม',
+        placeholder: 'พิมพ์ชื่ออัลบั้ม...',
+        rules: 'ฟังเพลงและตอบชื่ออัลบั้ม'
+      };
+    } else {
+      return {
+        title: 'Song Quiz',
+        emoji: '🎵',
+        description: 'ทายชื่อเพลง',
+        placeholder: 'พิมพ์ชื่อเพลง...',
+        rules: 'ฟังเพลงและตอบชื่อเพลง'
+      };
+    }
+  };
+
+  const modeInfo = getModeInfo();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-teal-600 p-4">
       <div className="max-w-2xl mx-auto">
@@ -327,16 +318,46 @@ export default function MusicQuiz() {
         {/* Setup Screen */}
         {gameState === 'setup' && (
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 text-white text-center">
-            <h1 className="text-4xl font-bold mb-6">🎵 Music Quiz</h1>
+            <h1 className="text-4xl font-bold mb-6">{modeInfo.emoji} Music Quiz</h1>
+            
+            {/* Mode Selection */}
+            <div className="mb-6">
+              <h3 className="text-lg font-bold mb-4">🎯 เลือกโหมดเกม</h3>
+              <div className="flex gap-4 justify-center mb-6">
+                <button
+                  onClick={() => setQuizMode('song')}
+                  className={`px-6 py-3 rounded-full font-bold transition-all ${
+                    quizMode === 'song' 
+                      ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg' 
+                      : 'bg-black/20 text-gray-300 hover:bg-black/30'
+                  }`}
+                >
+                  🎵 ทายชื่อเพลง
+                </button>
+                <button
+                  onClick={() => setQuizMode('album')}
+                  className={`px-6 py-3 rounded-full font-bold transition-all ${
+                    quizMode === 'album' 
+                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' 
+                      : 'bg-black/20 text-gray-300 hover:bg-black/30'
+                  }`}
+                >
+                  💿 ทายชื่ออัลบั้ม
+                </button>
+              </div>
+            </div>
+
             <div className="mb-6">
               <p className="text-lg mb-4">พร้อมทดสอบความรู้เพลงหรือยัง?</p>
               <div className="bg-black/20 rounded-lg p-4 mb-4">
-                <p className="text-sm mb-2">กติกา:</p>
+                <p className="text-sm mb-2">กติกาโหมด <span className="text-yellow-300 font-bold">{modeInfo.description}</span>:</p>
                 <ul className="text-sm text-left max-w-md mx-auto space-y-1">
-                  <li>• ฟังเพลงและใส่ชื่อไฟล์ (ไม่ต้องใส่ .mp3)</li>
+                  <li>• {modeInfo.rules}</li>
                   <li>• เวลา 30 วินาทีต่อข้อ</li>
-                  <li>• เพลงในระบบ: {musicFiles.length} เพลง</li>
+                  <li>• เพลงในระบบ: {songsData.length} เพลง</li>
+                  {quizMode === 'album' && <li>• อัลบั้มทั้งหมด: {albumsList.length} อัลบั้ม</li>}
                   <li>• <span className="text-yellow-300">💡 มี Autofill ช่วยเลือกคำตอบ</span></li>
+                  <li>• <span className="text-green-300">✨ แสดงเฉลย 10 วินาทีหลังตอบ</span></li>
                 </ul>
               </div>
               
@@ -352,16 +373,16 @@ export default function MusicQuiz() {
                   <option value={15}>15 ข้อ</option>
                   <option value={20}>20 ข้อ</option>
                   <option value={25}>25 ข้อ</option>
-                  <option value={allSongs.length}>ทั้งหมด ({allSongs.length} ข้อ)</option>
+                  <option value={songsData.length}>ทั้งหมด ({songsData.length} ข้อ)</option>
                 </select>
               </div>
             </div>
             <button
               onClick={startQuiz}
-              disabled={musicFiles.length === 0}
+              disabled={songsData.length === 0}
               className="bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 disabled:from-gray-500 disabled:to-gray-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-200 disabled:cursor-not-allowed"
             >
-              เริ่มเกม ({numberOfQuestions} ข้อ)
+              เริ่มเกม {modeInfo.description} ({numberOfQuestions} ข้อ)
             </button>
           </div>
         )}
@@ -372,6 +393,9 @@ export default function MusicQuiz() {
             <div className="mb-4">
               <span className="text-lg">ข้อ {currentQuestionIndex + 1}</span>
               <span className="text-gray-300"> จาก {shuffledSongs.length}</span>
+              <div className="text-sm opacity-80 mt-1">
+                โหมด: <span className="text-yellow-300 font-bold">{modeInfo.description}</span>
+              </div>
             </div>
             
             <div className={`text-6xl font-bold mb-6 ${timeLeft <= 10 ? 'text-red-400 animate-pulse' : 'text-yellow-400'}`}>
@@ -392,6 +416,11 @@ export default function MusicQuiz() {
               <p className="text-xs opacity-60 mb-2">
                 💡 กดปุ่ม play ถ้าเพลงไม่เล่นอัตโนมัติ
               </p>
+              {currentSongData && (
+                <p className="text-sm opacity-80 break-all">
+                  เพลง: {currentSongData.title}
+                </p>
+              )}
             </div>
 
             <form onSubmit={handleAnswerSubmit} className="mb-6">
@@ -404,7 +433,7 @@ export default function MusicQuiz() {
                   onKeyDown={handleKeyDown}
                   onBlur={handleInputBlur}
                   onFocus={handleInputFocus}
-                  placeholder="พิมพ์ชื่อเพลง... (มี autocomplete ช่วย)"
+                  placeholder={`${modeInfo.placeholder} (มี autocomplete ช่วย)`}
                   className="w-full p-4 rounded-lg text-black text-center text-lg mb-4"
                   autoFocus
                   autoComplete="off"
@@ -449,7 +478,7 @@ export default function MusicQuiz() {
             </form>
 
             <div className="text-xs opacity-60 mb-2">
-              💡 ใช้ลูกศรขึ้น/ลง เพื่อเลือก, Enter เพื่อใส่คำตอบ
+              💡 ใช้ลูกศรขึ้น/ลง เพื่อเลือก{quizMode === 'album' ? 'อัลบั้ม' : 'เพลง'}, Enter เพื่อใส่คำตอบ
             </div>
 
             <div className="text-2xl font-bold">
@@ -458,10 +487,68 @@ export default function MusicQuiz() {
           </div>
         )}
 
+        {/* Answer Screen (เฉลย 10 วินาที) */}
+        {gameState === 'answer' && currentSongData && (
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 text-white text-center">
+            <div className="mb-4">
+              <span className="text-lg">ข้อ {currentQuestionIndex + 1}</span>
+              <span className="text-gray-300"> - เฉลย</span>
+              <div className="text-sm opacity-80 mt-1">
+                โหมด: <span className="text-yellow-300 font-bold">{modeInfo.description}</span>
+              </div>
+            </div>
+            
+            <div className={`text-4xl font-bold mb-6 ${isCorrect ? 'text-green-400' : 'text-red-400'}`}>
+              {isCorrect ? '✅ ถูกต้อง!' : '❌ ผิด!'}
+            </div>
+
+            <div className="bg-black/20 rounded-lg p-6 mb-6">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold mb-2">🎵 ข้อมูลเพลง</h3>
+                <p className="text-sm mb-1"><strong>เพลง:</strong> {currentSongData.title}</p>
+                <p className="text-sm mb-1"><strong>อัลบั้ม:</strong> <span className="text-blue-300">{currentSongData.album}</span></p>
+              </div>
+              
+              <div className="mb-4">
+                <h4 className="text-md font-bold mb-2">📝 คำตอบ</h4>
+                <p className="text-sm mb-1"><strong>คำตอบของคุณ:</strong> {userAnswer || '(ไม่ตอบ)'}</p>
+                <p className="text-sm">
+                  <strong>คำตอบที่ถูก:</strong> 
+                  <span className="text-green-300 ml-1">
+                    {quizMode === 'album' ? currentSongData.album : currentSongData.title}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div className="text-3xl font-bold text-yellow-400 mb-4">
+              ⏰ {answerTimeLeft}
+            </div>
+
+            <div className="text-sm opacity-80">
+              รอ {answerTimeLeft} วินาที หรือ
+            </div>
+            
+            <button
+              onClick={nextQuestion}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition-colors mt-2"
+            >
+              ข้อถัดไป
+            </button>
+
+            <div className="text-xl font-bold mt-4">
+              คะแนน: {score} / {currentQuestionIndex + 1}
+            </div>
+          </div>
+        )}
+
         {/* Results Screen */}
         {gameState === 'results' && (
           <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 text-white text-center">
-            <h2 className="text-3xl font-bold mb-6">🎉 จบเกมแล้ว!</h2>
+            <h2 className="text-3xl font-bold mb-4">🎉 จบเกมแล้ว!</h2>
+            <div className="text-lg mb-6">
+              โหมด: <span className="text-yellow-300 font-bold">{modeInfo.description}</span>
+            </div>
             
             <div className="text-2xl mb-6">
               คะแนนรวม: <span className="font-bold text-yellow-400">{score}</span> / {shuffledSongs.length}
@@ -481,16 +568,22 @@ export default function MusicQuiz() {
                 >
                   <div className="font-bold mb-1">
                     ข้อ {result.question}: {result.isCorrect ? '✅ ถูก' : '❌ ผิด'}
+                    <span className="text-xs opacity-70 ml-2">
+                      (โหมด: {result.mode === 'album' ? 'อัลบั้ม' : 'เพลง'})
+                    </span>
                   </div>
-                  <div className="break-all opacity-90">
-                    ไฟล์: {result.song}
+                  <div className="break-all opacity-90 mb-1">
+                    เพลง: {result.songData.title}
                   </div>
-                  <div className="opacity-80">
+                  <div className="opacity-80 mb-1">
+                    อัลบั้ม: <span className="text-blue-300">{result.songData.album}</span>
+                  </div>
+                  <div className="opacity-80 mb-1">
                     คำตอบของคุณ: {result.userAnswer}
                   </div>
                   {!result.isCorrect && (
-                    <div className="opacity-80">
-                      คำตอบที่ถูก: {result.correctAnswer}
+                    <div className="opacity-80 mb-1">
+                      คำตอบที่ถูก: <span className="text-green-300">{result.correctAnswer}</span>
                     </div>
                   )}
                   <div className="text-xs opacity-60">
