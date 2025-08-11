@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Music Quiz - เกมทายชื่อเพลง
 
-## Getting Started
+เกมทดสอบความรู้เพลงที่สร้างด้วย Next.js 15 และ React 19
 
-First, run the development server:
+## คุณสมบัติ
+
+- 🎵 เล่นเพลงแบบสุ่มจาก pool ของไฟล์ MP3
+- ⏱️ จับเวลา 30 วินาทีต่อข้อ  
+- 📝 ตอบโดยใส่ชื่อไฟล์เพลง (ไม่ต้องใส่ .mp3)
+- 📊 ระบบให้คะแนนและแสดงผลลัพธ์
+- 🎯 แสดงผลรายละเอียดในแต่ละข้อ
+
+## วิธีติดตั้งและรัน
 
 ```bash
+# ติดตั้ง dependencies
+npm install
+
+# รันในโหมด development
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# เปิดบราว์เซอร์ไปที่ http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## วิธีเพิ่มไฟล์เพลง
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. สร้างโฟลเดอร์ `public/music/` (ถ้ายังไม่มี)
+2. ใส่ไฟล์ MP3 ลงในโฟลเดอร์ `public/music/`
+3. แก้ไขไฟล์ `src/app/page.js` ในส่วน `demoSongs` array ให้ตรงกับชื่อไฟล์จริง
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ตัวอย่าง:
+```javascript
+const demoSongs = [
+  'เพลงที่หนึ่ง.mp3',
+  'เพลงที่สอง.mp3', 
+  'เพลงที่สาม.mp3',
+  // เพิ่มไฟล์เพลงตามต้องการ
+];
+```
 
-## Learn More
+## โครงสร้างไฟล์
 
-To learn more about Next.js, take a look at the following resources:
+```
+d_c_music_quiz/
+├── public/
+│   └── music/          # ใส่ไฟล์ MP3 ที่นี่
+├── src/
+│   └── app/
+│       ├── page.js     # หน้าหลักของเกม
+│       ├── layout.js   # Layout และ metadata
+│       └── globals.css # Styling
+└── README.md
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## การใช้งาน
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **หน้าต้อนรับ**: แสดงกติกาและจำนวนเพลง
+2. **เล่นเกม**: ฟังเพลงและใส่ชื่อไฟล์ ภายใน 30 วินาที
+3. **ผลลัพธ์**: แสดงคะแนนรวมและรายละเอียดแต่ละข้อ
 
-## Deploy on Vercel
+## เทคโนโลยีที่ใช้
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js 15** - React framework
+- **React 19** - UI library
+- **Tailwind CSS 4** - Styling
+- **HTML5 Audio** - เล่นไฟล์เสียง
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## การปรับแต่ง
+
+### เปลี่ยนเวลาต่อข้อ
+แก้ไขตัวเลข `30` ในไฟล์ `page.js`:
+```javascript
+setTimeLeft(30); // เปลี่ยนเป็นจำนวนวินาทีที่ต้องการ
+```
+
+### เพิ่มฟีเจอร์
+สามารถเพิ่มฟีเจอร์ได้ตามต้องการ เช่น:
+- ระดับความยาก
+- หมวดหมู่เพลง  
+- ระบบผู้เล่นหลายคน
+- บันทึกคะแนนสูงสุด
+
+## License
+
+MIT License
