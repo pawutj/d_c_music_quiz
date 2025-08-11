@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 
+*.mp3
+
 # debug
 npm-debug.log*
 yarn-debug.log*
